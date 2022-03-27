@@ -6,14 +6,14 @@ pipeline {
 
     stage('Checkout Source') {
       steps {
-        git url:'https://github.com/tejprakashbkn/hellowhale.git', branch:'master'
+        git url:'https://github.com/Arpithared/hellowhale.git', branch:'master'
       }
     }
     
       stage("Build image") {
             steps {
                 script {
-                    myapp = docker.build("tejprakashbkn/hellowhale:${env.BUILD_ID}")
+                    myapp = docker.build("arpithadockerhub/hellowhale:${env.BUILD_ID}")
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
       stage("Push image") {
             steps {
                 script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub') {
+                    docker.withRegistry('https://registry.hub.docker.com', 'acf3e158-74c1-44b7-afe5-37075a124eeb') {
                             myapp.push("latest")
                             myapp.push("${env.BUILD_ID}")
                     }
